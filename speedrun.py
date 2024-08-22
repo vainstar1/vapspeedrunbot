@@ -34,7 +34,7 @@ async def on_message(message):
     if "speedrun" in message.content.lower():
         if current_time - last_used >= cooldown_time:
             last_used = current_time
-            await message.channel.send(file=discord.File('speedrun.gif'))
+            await message.reply(file=discord.File('speedrun.gif'))
         else:
             remaining_time = int(cooldown_time - (current_time - last_used))
             print("on cooldown gangy wangy")
