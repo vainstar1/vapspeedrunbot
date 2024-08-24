@@ -8,7 +8,6 @@ from dotenv import load_dotenv
 load_dotenv()
 
 TOKEN = os.getenv('DISCORD_TOKEN')
-OWNER_ID = 745762346479386686 
 
 intents = discord.Intents.default()
 intents.message_content = True
@@ -43,17 +42,5 @@ async def on_message(message):
             print(f"on cooldown for {remaining_time} seconds")
 
     await bot.process_commands(message)
-
-@bot.tree.command(name='secret')
-async def secret_command(interaction: discord.Interaction, new_cooldown: int = None):
-    global cooldown_time
-    if interaction.user.id == OWNER_ID:
-        if new_cooldown is not None:
-            cooldown_time = new_cooldown
-            await interaction.response.send_message(f"Cooldown time updated to {cooldown_time} seconds.", ephemeral=True)
-        else:
-            await interaction.response.send_message("specify your cooldown bro", ephemeral=True)
-    else:
-        await interaction.response.send_message("Only Odd can use this command.", ephemeral=True)
 
 bot.run(TOKEN)
